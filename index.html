@@ -24,7 +24,7 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    background: transparent;
+    background: #0d0b08;
     color: var(--text);
     font-family: 'Crimson Pro', Georgia, serif;
     font-size: 18px;
@@ -48,33 +48,23 @@
   /* ── Corner images ── */
   .corner-img {
     position: fixed;
-    width: 220px;
-    opacity: 0.13;
+    width: 200px;
+    opacity: 0.18;
     pointer-events: none;
     z-index: 0;
-    filter: grayscale(30%) sepia(20%);
+    filter: grayscale(20%) sepia(15%);
     transition: opacity 0.3s ease;
+    object-fit: contain;
   }
-  .corner-img:hover { opacity: 0.22; }
+  .corner-img:hover { opacity: 0.28; }
 
-  .corner-tl {
-    top: -20px; left: -20px;
-    transform: scaleX(-1);
-  }
-  .corner-tr {
-    top: -20px; right: -20px;
-  }
-  .corner-bl {
-    bottom: -20px; left: -20px;
-    transform: scaleX(-1) scaleY(-1);
-  }
-  .corner-br {
-    bottom: -20px; right: -20px;
-    transform: scaleY(-1);
-  }
+  .corner-tl { top: 0; left: 0; }
+  .corner-tr { top: 0; right: 0; }
+  .corner-bl { bottom: 0; left: 0; }
+  .corner-br { bottom: 0; right: 0; }
 
   @media (max-width: 700px) {
-    .corner-img { width: 130px; opacity: 0.08; }
+    .corner-img { width: 120px; opacity: 0.1; }
   }
 
   .page {
