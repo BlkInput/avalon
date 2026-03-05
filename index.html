@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Avalon Bot — How to Play</title>
+<title>Avalon — Home</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
 <style>
@@ -15,8 +15,6 @@
     --text-dim: #a09880;
     --good: #5b9bd5;
     --evil: #c0544a;
-    --bg: rgba(0,0,0,0);
-    --card-bg: rgba(255,255,255,0.04);
     --card-border: rgba(201,168,76,0.2);
     --divider: rgba(201,168,76,0.15);
   }
@@ -27,10 +25,13 @@
     background: #0d0b08;
     color: var(--text);
     font-family: 'Crimson Pro', Georgia, serif;
-    font-size: 18px;
-    line-height: 1.75;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     position: relative;
+    overflow: hidden;
   }
 
   body::before {
@@ -38,538 +39,172 @@
     position: fixed;
     inset: 0;
     background: url('merlin.png') center center / cover no-repeat;
-    opacity: 0.04;
+    opacity: 0.08;
     pointer-events: none;
-    z-index: 0;
   }
 
-  .page { position: relative; z-index: 1; }
-
-  /* ── Corner images ── */
-  .corner-img {
+  body::after {
+    content: '';
     position: fixed;
-    width: 200px;
-    opacity: 0.18;
+    inset: 0;
+    background: rgba(13,11,8,0.6);
     pointer-events: none;
-    z-index: 0;
-    filter: grayscale(20%) sepia(15%);
-    transition: opacity 0.3s ease;
-    object-fit: contain;
-  }
-  .corner-img:hover { opacity: 0.28; }
-
-  .corner-tl { top: 0; left: 0; }
-  .corner-tr { top: 0; right: 0; }
-  .corner-bl { bottom: 0; left: 0; }
-  .corner-br { bottom: 0; right: 0; }
-
-  @media (max-width: 700px) {
-    .corner-img { width: 120px; opacity: 0.1; }
   }
 
-  .page {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 60px 32px 100px;
-  }
-
-  /* ── Header ── */
-  .header {
+  .container {
+    position: relative;
+    z-index: 1;
     text-align: center;
-    margin-bottom: 64px;
-    animation: fadeDown 0.8s ease both;
+    padding: 40px 32px;
+    max-width: 680px;
+    width: 100%;
+    animation: fadeUp 0.9s ease both;
   }
 
-  .header-crest {
-    font-size: 48px;
-    margin-bottom: 12px;
-    filter: drop-shadow(0 0 12px rgba(201,168,76,0.4));
+  .crest {
+    font-size: 56px;
+    margin-bottom: 16px;
+    filter: drop-shadow(0 0 24px rgba(201,168,76,0.5));
+    animation: pulse 4s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { filter: drop-shadow(0 0 14px rgba(201,168,76,0.4)); }
+    50%       { filter: drop-shadow(0 0 32px rgba(201,168,76,0.75)); }
   }
 
   h1 {
     font-family: 'Cinzel', serif;
-    font-size: clamp(28px, 5vw, 44px);
+    font-size: clamp(28px, 6vw, 50px);
     font-weight: 700;
     color: var(--gold-light);
-    letter-spacing: 0.06em;
-    text-shadow: 0 0 40px rgba(201,168,76,0.3);
-    margin-bottom: 10px;
+    letter-spacing: 0.07em;
+    text-shadow: 0 2px 40px rgba(201,168,76,0.3);
+    margin-bottom: 8px;
   }
 
-  .header-sub {
+  .subtitle {
     font-style: italic;
     color: var(--text-dim);
-    font-size: 17px;
-    letter-spacing: 0.02em;
+    font-size: 18px;
+    margin-bottom: 6px;
+  }
+
+  .tagline {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 48px;
   }
 
   .gold-rule {
-    width: 120px;
+    width: 140px;
     height: 1px;
     background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    margin: 20px auto 0;
+    margin: 0 auto 48px;
   }
 
-  /* ── Section ── */
-  section {
-    margin-bottom: 52px;
-    animation: fadeUp 0.6s ease both;
-  }
-
-  section:nth-child(2) { animation-delay: 0.1s; }
-  section:nth-child(3) { animation-delay: 0.2s; }
-  section:nth-child(4) { animation-delay: 0.3s; }
-  section:nth-child(5) { animation-delay: 0.4s; }
-  section:nth-child(6) { animation-delay: 0.5s; }
-
-  h2 {
-    font-family: 'Cinzel', serif;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  h2::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--divider);
-  }
-
-  h3 {
-    font-family: 'Cinzel', serif;
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--gold-light);
-    margin: 28px 0 10px;
-  }
-
-  p {
-    color: var(--text);
-    margin-bottom: 14px;
-    font-size: 18px;
-  }
-
-  /* ── Mode Cards ── */
-  .mode-grid {
+  /* ── Cards ── */
+  .cards {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
-    margin-bottom: 32px;
+    margin-bottom: 0;
   }
 
-  @media (max-width: 600px) {
-    .mode-grid { grid-template-columns: 1fr; }
+  @media (max-width: 500px) {
+    .cards { grid-template-columns: 1fr; }
   }
 
-  .mode-card {
-    background: var(--card-bg);
+  .card {
+    display: block;
+    text-decoration: none;
+    background: rgba(255,255,255,0.03);
     border: 1px solid var(--card-border);
     border-radius: 4px;
-    padding: 24px;
+    padding: 28px 24px;
     position: relative;
     overflow: hidden;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
   }
 
-  .mode-card::before {
+  .card::before {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 2px;
+    transition: opacity 0.2s ease;
   }
 
-  .mode-card.good::before { background: linear-gradient(90deg, transparent, var(--good), transparent); }
-  .mode-card.evil::before { background: linear-gradient(90deg, transparent, var(--evil), transparent); }
+  .card.good::before  { background: linear-gradient(90deg, transparent, var(--good), transparent); }
+  .card.evil::before  { background: linear-gradient(90deg, transparent, var(--evil), transparent); }
 
-  .mode-card .mode-icon { font-size: 28px; margin-bottom: 10px; }
-  .mode-card .mode-title {
+  .card:hover {
+    background: rgba(255,255,255,0.06);
+    border-color: rgba(201,168,76,0.4);
+    transform: translateY(-3px);
+  }
+
+  .card-icon { font-size: 32px; margin-bottom: 12px; }
+
+  .card-title {
     font-family: 'Cinzel', serif;
     font-size: 14px;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     margin-bottom: 8px;
   }
-  .mode-card.good .mode-title { color: var(--good); }
-  .mode-card.evil .mode-title { color: var(--evil); }
-  .mode-card p { font-size: 16px; color: var(--text-dim); margin: 0; }
+  .card.good .card-title { color: var(--good); }
+  .card.evil .card-title { color: var(--evil); }
 
-  /* ── Step List ── */
-  .steps {
-    list-style: none;
-    counter-reset: steps;
-  }
-
-  .steps li {
-    counter-increment: steps;
-    display: grid;
-    grid-template-columns: 36px 1fr;
-    gap: 16px;
-    margin-bottom: 20px;
-    align-items: start;
-  }
-
-  .steps li::before {
-    content: counter(steps);
-    font-family: 'Cinzel', serif;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--gold);
-    background: rgba(201,168,76,0.08);
-    border: 1px solid var(--gold-dim);
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-
-  .step-content { padding-top: 4px; }
-  .step-content strong {
-    font-family: 'Cinzel', serif;
-    font-size: 14px;
-    letter-spacing: 0.05em;
-    color: var(--gold-light);
-    display: block;
-    margin-bottom: 4px;
-  }
-  .step-content p { margin: 0; font-size: 17px; color: var(--text-dim); }
-
-  /* ── Command blocks ── */
-  .cmd-list {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .cmd {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 16px;
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 3px;
-    padding: 12px 16px;
-    align-items: center;
-  }
-
-  @media (max-width: 580px) {
-    .cmd { grid-template-columns: 1fr; gap: 4px; }
-  }
-
-  .cmd code {
-    font-family: 'Courier New', monospace;
-    font-size: 14px;
-    color: var(--gold-light);
-    background: rgba(201,168,76,0.08);
-    padding: 3px 8px;
-    border-radius: 3px;
-    white-space: nowrap;
-  }
-
-  .cmd span {
-    font-size: 16px;
+  .card-desc {
+    font-size: 15px;
     color: var(--text-dim);
+    line-height: 1.6;
   }
 
-  /* ── Phase timeline ── */
-  .phases {
-    position: relative;
-    padding-left: 28px;
-  }
-
-  .phases::before {
-    content: '';
-    position: absolute;
-    left: 6px; top: 8px; bottom: 8px;
-    width: 1px;
-    background: linear-gradient(180deg, var(--gold-dim), transparent);
-  }
-
-  .phase {
-    position: relative;
-    margin-bottom: 28px;
-  }
-
-  .phase::before {
-    content: '';
-    position: absolute;
-    left: -25px;
-    top: 8px;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--gold);
-    box-shadow: 0 0 8px rgba(201,168,76,0.5);
-  }
-
-  .phase-title {
+  .card-arrow {
+    display: inline-block;
+    margin-top: 14px;
     font-family: 'Cinzel', serif;
-    font-size: 14px;
-    letter-spacing: 0.08em;
-    color: var(--gold-light);
-    margin-bottom: 6px;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    transition: color 0.2s ease;
   }
-
-  .phase p { font-size: 17px; color: var(--text-dim); margin: 0; }
-
-  .phase .phase-cmd {
-    font-family: 'Courier New', monospace;
-    font-size: 13px;
-    color: var(--gold);
-    background: rgba(201,168,76,0.07);
-    padding: 2px 7px;
-    border-radius: 2px;
-    white-space: nowrap;
-  }
-
-  /* ── Note box ── */
-  .note {
-    background: rgba(201,168,76,0.05);
-    border-left: 2px solid var(--gold-dim);
-    padding: 16px 20px;
-    border-radius: 0 3px 3px 0;
-    margin-top: 16px;
-  }
-
-  .note p {
-    font-size: 16px;
-    font-style: italic;
-    color: var(--text-dim);
-    margin: 0;
-  }
-
-  /* ── Role grid ── */
-  .role-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 12px;
-  }
-
-  .role-card {
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 3px;
-    padding: 14px 16px;
-  }
-
-  .role-card .role-name {
-    font-family: 'Cinzel', serif;
-    font-size: 13px;
-    letter-spacing: 0.06em;
-    margin-bottom: 4px;
-  }
-
-  .role-card.good .role-name { color: var(--good); }
-  .role-card.evil .role-name { color: var(--evil); }
-  .role-card p { font-size: 15px; color: var(--text-dim); margin: 0; line-height: 1.5; }
-
-  /* ── Animations ── */
-  @keyframes fadeDown {
-    from { opacity: 0; transform: translateY(-20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
+  .card:hover .card-arrow { color: var(--gold); }
 
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
+    from { opacity: 0; transform: translateY(24px); }
     to   { opacity: 1; transform: translateY(0); }
   }
 </style>
 </head>
 <body>
-<img src="morgana.png"  class="corner-img corner-tl" alt="">
-<img src="percival.png" class="corner-img corner-tr" alt="">
-<img src="mordred.png"  class="corner-img corner-bl" alt="">
-<img src="merlin.png"   class="corner-img corner-br" alt="">
+<div class="container">
+  <div class="crest">⚔️</div>
+  <h1>The Resistance: Avalon</h1>
+  <p class="subtitle">A game of hidden roles, deduction, and deception</p>
+  <p class="tagline">Discord Bot Edition</p>
+  <div class="gold-rule"></div>
 
-<div class="page">
-
-  <!-- Header -->
-  <div class="header">
-    <div class="header-crest">⚔️</div>
-    <h1>The Resistance: Avalon</h1>
-    <p class="header-sub">Discord Bot — How to Play</p>
-    <div class="gold-rule"></div>
+  <div class="cards">
+    <a href="guide.html" class="card good">
+      <div class="card-icon">🔮</div>
+      <div class="card-title">New Player Guide</div>
+      <p class="card-desc">Learn the rules, roles, and how to play from scratch.</p>
+      <span class="card-arrow">Read the guide →</span>
+    </a>
+    <a href="avalon-guide.html" class="card evil">
+      <div class="card-icon">🤖</div>
+      <div class="card-title">Bot Commands</div>
+      <p class="card-desc">How to set up and run a game using the Discord bot.</p>
+      <span class="card-arrow">View commands →</span>
+    </a>
   </div>
-
-  <!-- Game Modes -->
-  <section>
-    <h2>Choose Your Mode</h2>
-    <div class="mode-grid">
-      <div class="mode-card good">
-        <div class="mode-icon">🤖</div>
-        <div class="mode-title">Bot Mode</div>
-        <p>Play with 1 or more humans and fill the rest of the seats with AI bots. Great for practice or when you can't get a full group.</p>
-      </div>
-      <div class="mode-card evil">
-        <div class="mode-icon">👥</div>
-        <div class="mode-title">Full Human Mode</div>
-        <p>5 to 10 real players. The bot manages the game — roles, quests, voting, and tracking — while the deception is all human.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Bot Mode Setup -->
-  <section>
-    <h2>Setting Up — Bot Mode (1+ Humans, Rest Bots)</h2>
-    <ol class="steps">
-      <li>
-        <div class="step-content">
-          <strong>Create a Lobby</strong>
-          <p>Run <span class="phase-cmd">/avalon</span> in any channel. A lobby embed appears with a Join button.</p>
-        </div>
-      </li>
-      <li>
-        <div class="step-content">
-          <strong>Join the Lobby</strong>
-          <p>Click <strong>Join Game</strong> on the embed, or have each human player do so.</p>
-        </div>
-      </li>
-      <li>
-        <div class="step-content">
-          <strong>Add Bots to Fill Seats</strong>
-          <p>Run <span class="phase-cmd">/addbot difficulty:Hard name:Arthur</span> for each bot seat you want to fill. You need at least 5 players total. The <code>name</code> field is optional — leave it out for a random name. Difficulty options are <strong>Easy</strong>, <strong>Medium</strong>, and <strong>Hard</strong>.</p>
-        </div>
-      </li>
-      <li>
-        <div class="step-content">
-          <strong>Start the Game</strong>
-          <p>Run <span class="phase-cmd">/startgame</span> once you have 5–10 total players. Roles are assigned and DMed to human players automatically.</p>
-        </div>
-      </li>
-    </ol>
-    <div class="note">
-      <p>Bots will vote, propose teams, play mission cards, and even attempt assassination — all automatically with natural delays so the game doesn't feel instant.</p>
-    </div>
-  </section>
-
-  <!-- Full Human Setup -->
-  <section>
-    <h2>Setting Up — Full Human Mode (5–10 Players)</h2>
-    <ol class="steps">
-      <li>
-        <div class="step-content">
-          <strong>Create a Lobby</strong>
-          <p>Run <span class="phase-cmd">/avalon</span> in your game channel.</p>
-        </div>
-      </li>
-      <li>
-        <div class="step-content">
-          <strong>All Players Join</strong>
-          <p>Each player clicks <strong>Join Game</strong> on the lobby embed. You need at least 5 people before starting.</p>
-        </div>
-      </li>
-      <li>
-        <div class="step-content">
-          <strong>Start the Game</strong>
-          <p>Any player runs <span class="phase-cmd">/startgame</span>. Roles are randomly assigned and DMed privately to each player. Check your DMs.</p>
-        </div>
-      </li>
-    </ol>
-    <div class="note">
-      <p>Make sure your Discord DMs are open from server members — the bot sends your secret role and mission cards privately.</p>
-    </div>
-  </section>
-
-  <!-- Game Flow -->
-  <section>
-    <h2>How a Game Flows</h2>
-    <div class="phases">
-      <div class="phase">
-        <div class="phase-title">1 — Role Reveal</div>
-        <p>Each human player receives a DM with their role card, alignment, and any special information (who Merlin sees as evil, who evil players see as teammates, etc.).</p>
-      </div>
-      <div class="phase">
-        <div class="phase-title">2 — Team Proposal</div>
-        <p>The current leader proposes a team for the quest. Run <span class="phase-cmd">/players</span> to see the numbered player list, then use <span class="phase-cmd">/propose 1 3</span> with the player numbers. Bot leaders propose automatically after a short thinking delay.</p>
-      </div>
-      <div class="phase">
-        <div class="phase-title">3 — Vote</div>
-        <p>All players vote Approve or Reject using the buttons in the channel. Votes are hidden until everyone has submitted, then revealed all at once. If more than half reject, the leader passes to the next player and a new team must be proposed. Five consecutive rejections hands evil an automatic win.</p>
-      </div>
-      <div class="phase">
-        <div class="phase-title">4 — Mission</div>
-        <p>Approved team members receive a DM asking them to play <strong>Success</strong> or <strong>Fail</strong>. Good players must always play Success. Evil players may play Fail. Cards are shuffled and revealed anonymously. Most quests fail with 1 fail card — some larger quests require 2.</p>
-      </div>
-      <div class="phase">
-        <div class="phase-title">5 — Repeat</div>
-        <p>Play continues through up to 5 quests. Good wins by succeeding 3. Evil wins by failing 3.</p>
-      </div>
-      <div class="phase">
-        <div class="phase-title">6 — Assassination</div>
-        <p>If Good wins 3 quests, the Assassin gets one chance to identify and eliminate Merlin. If they guess correctly, Evil wins. The Assassin uses <span class="phase-cmd">/assassinate 2</span> with the player's number from <span class="phase-cmd">/players</span>.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Useful Commands -->
-  <section>
-    <h2>Commands You'll Use Mid-Game</h2>
-    <div class="cmd-list">
-      <div class="cmd"><code>/players</code><span>Numbered list of all players — use these numbers to propose and assassinate</span></div>
-      <div class="cmd"><code>/propose 1 3</code><span>Propose players #1 and #3 for the quest (leader only)</span></div>
-      <div class="cmd"><code>/missioncard success</code><span>Fallback if your DMs are blocked — submit your card in the channel</span></div>
-      <div class="cmd"><code>/assassinate 2</code><span>Assassin only — target player #2 as Merlin</span></div>
-      <div class="cmd"><code>/board</code><span>Show the current quest track and score</span></div>
-      <div class="cmd"><code>/questinfo</code><span>Full snapshot of the current quest — team, votes, card status</span></div>
-      <div class="cmd"><code>/history</code><span>Full log of every completed quest with teams, votes, and fail cards</span></div>
-      <div class="cmd"><code>/stats</code><span>Server leaderboard — wins, losses, Merlin survival rate, assassin accuracy</span></div>
-      <div class="cmd"><code>/pastgames</code><span>Browse previous completed games with full summaries</span></div>
-      <div class="cmd"><code>/endgame</code><span>Force-cancel the current game at any point</span></div>
-    </div>
-  </section>
-
-  <!-- Roles -->
-  <section>
-    <h2>Roles at a Glance</h2>
-    <h3>Good</h3>
-    <div class="role-grid" style="margin-bottom:20px;">
-      <div class="role-card good">
-        <div class="role-name">Merlin</div>
-        <p>Knows who is evil. Must stay hidden or be assassinated at the end.</p>
-      </div>
-      <div class="role-card good">
-        <div class="role-name">Percival</div>
-        <p>Sees Merlin and Morgana — but can't tell which is which.</p>
-      </div>
-      <div class="role-card good">
-        <div class="role-name">Loyal Servant</div>
-        <p>No special information. Use deduction and trust your gut.</p>
-      </div>
-    </div>
-    <h3>Evil</h3>
-    <div class="role-grid">
-      <div class="role-card evil">
-        <div class="role-name">Assassin</div>
-        <p>If Good wins 3 quests, gets one shot to eliminate Merlin.</p>
-      </div>
-      <div class="role-card evil">
-        <div class="role-name">Morgana</div>
-        <p>Appears as Merlin to Percival. Sow confusion.</p>
-      </div>
-      <div class="role-card evil">
-        <div class="role-name">Mordred</div>
-        <p>Hidden from Merlin's sight entirely.</p>
-      </div>
-      <div class="role-card evil">
-        <div class="role-name">Oberon</div>
-        <p>Evil, but unknown to other evil players — and vice versa.</p>
-      </div>
-      <div class="role-card evil">
-        <div class="role-name">Minion</div>
-        <p>Standard evil. Knows teammates, visible to Merlin.</p>
-      </div>
-    </div>
-  </section>
-
 </div>
 </body>
 </html>
